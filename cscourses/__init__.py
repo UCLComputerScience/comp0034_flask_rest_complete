@@ -43,6 +43,9 @@ def create_app(config_class=DevConfig):
     from cscourses.auth.routes import bp_auth
     app.register_blueprint(bp_auth)
 
+    from cscourses.api.routes import bp_api
+    app.register_blueprint(bp_api)
+
     return app
 
 
