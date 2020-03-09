@@ -11,6 +11,9 @@ http_auth = HTTPBasicAuth()
 
 @bp_api.after_request
 def add_header(response):
+    # Note: this is redundant if you use Flask.jsonify as jsonify returns a response object and
+    # sets the content type to application/json. Included in this repository so you are aware of the after_request
+    # decorator
     response.headers['Content-Type'] = 'application/json'
     return response
 
@@ -44,7 +47,7 @@ def verify_password(username, password):
 
 
 @bp_api.route('/courses', methods=['GET'])
-@http_auth.login_required
+# @http_auth.login_required
 def read_courses():
     courses = Course.query.all()
     json = jsonify(courses=[c.serialize for c in courses])
