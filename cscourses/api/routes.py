@@ -44,7 +44,7 @@ def verify_password(username, password):
 
 
 @bp_api.route('/courses', methods=['GET'])
-@http_auth.login_required
+@http_auth.login_required()
 def read_courses():
     courses = Course.query.all()
     json = jsonify(courses=[c.serialize for c in courses])
